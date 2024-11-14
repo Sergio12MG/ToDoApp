@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ToDo App</title>
+        <link rel="stylesheet" href="./assets/styles/styles.css" />
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="./assets/images/todo-logo.svg" alt="Logo de cabecera">
+                <h1>ToDo App</h1>
+            </div>
+
+            <nav>
+
+            </nav>
+        </header>
+
+        <main>
+            <!-- BARRA LATERAL-->
+            <aside id="menu-bar">
+                <h2>Menú</h2>
+                <div id="items-menu">
+                    <a href="#main-content"><div class="item-menu"><img src="./assets/images/home.svg" alt="Principal"><h3>Principal</h3></div></a>
+                    <a href="#tasks-container"><div class="item-menu"><img src="./assets/images/list-logo.svg" alt="Mis tareas"><h3>Mis tareas</h3></div></a>
+                    <a href="papelera.html"><div class="item-menu"><img src="./assets/images/trash-can.svg" alt="Papelera"><h3>Papelera</h3></div></a>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL-->
+            <section id="paneles">
+                <section id="main-content">
+                    <h2>Resumen</h2>
+                    <hr>
+                    <div id="resumen">
+                        <div class="item-resumen">
+                            <p class="item-resumen__title">Tareas pendientes</p>
+                            <p class="item-resumen__number">0</p>
+                        </div>
+                        <div class="item-resumen">
+                            <p class="item-resumen__title">Tareas completadas</p>
+                            <p class="item-resumen__number">0</p>
+                        </div>
+                        <div class="item-resumen">
+                            <p class="item-resumen__title">Tareas eliminadas</p>
+                            <p class="item-resumen__number">0</p>
+                        </div>
+                    </div>
+                </section>
+
+                <hr>
+    
+                <section id="tasks-container">
+                    <h2>Mis tareas</h2>
+
+                    <a href="crear-tarea.html"><div id="create-task-button"><img src="./assets/images/create.svg" alt="Crear una tarea"><p>Crear</p></div></a>
+
+                    <div id="tasks-list">
+                        
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer>
+
+        </footer>
+
+        <script></script>
+    </body>
+</html>
