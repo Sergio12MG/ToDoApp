@@ -34,7 +34,32 @@
                 <section id="create-task">
                     <h2>Crear una tarea</h2>
 
-                    <a href="crear-tarea.html"><div id="create-task-button"><img src="./assets/images/create.svg" alt="Crear una tarea"><p>Crear</p></div></a>
+                    <form method='post' action='action'>
+                        <label for="title-task">Título</label>
+                        <input type="text" name="title-task" id="title-task">
+
+                        <label for="description-task">Descripción</label>
+                        <textarea name="description-task" id="description-task"></textarea>
+
+                        <label for="priority-task">Prioridad</label>
+                        <select name="priority-task">
+                            <option value="baja">Baja</option>
+                            <option value="media">Media</option>
+                            <option value="alta">Alta</option>
+                        </select>
+
+                        <label for="date-task">Fecha límite</label>
+                        <input type="date" name="date-task" id="date-task">
+
+                        <label for="category-task">Categoría</label>
+                        <select name="category-task">
+                            <option value="trabajo">Trabajo</option>
+                            <option value="personal">Personal</option>
+                            <option value="estudio">Estudio</option>
+                        </select>
+                        
+                        <input type='submit' value='Añadir'>
+                    </form>
 
                     <div id="tasks-list">
                         
@@ -44,9 +69,20 @@
         </main>
 
         <footer>
-
+            <div>
+                <h2>Desarrollado por</h2>
+                <p>Sergio Mejía</p>
+            </div>
+            <div>
+                <img src="./assets/images/GitHub.png" alt="">
+                <p>Sergio12MG</p>
+            </div>
+            <div>
+                <img src="./assets/images/Discord.png" alt="">
+                <p>s.m.g2070</p>
+            </div>
         </footer>
 
-        <script></script>
+        <script src="assets/scripts/crear-tarea.js"></script>
     </body>
 </html>

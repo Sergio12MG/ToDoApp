@@ -65,9 +65,61 @@
         </main>
 
         <footer>
-
+            <div>
+                <h2>Desarrollado por</h2>
+                <p>Sergio Mejía</p>
+            </div>
+            <div>
+                <img src="./assets/images/GitHub.png" alt="">
+                <p>Sergio12MG</p>
+            </div>
+            <div>
+                <img src="./assets/images/Discord.png" alt="">
+                <p>s.m.g2070</p>
+            </div>
         </footer>
 
-        <script></script>
+        <script>
+            function loadTasks() {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+                const tasksList = document.getElementById('tasks-list');
+                tasksList.innerHTML = '';
+        
+                if (tasks.length === 0) {
+                    tasksList.innerHTML = '<p>Aún no hay tareas</p>';
+                    return;
+                }
+        
+                tasks.forEach((task, index) => {
+                    const taskElement = document.createElement('div');
+                    taskElement.classList.add('task-item');
+        
+                    taskElement.innerHTML = `
+                        <h3>${task.title}</h3>
+                        <p><strong>Descripción:</strong> ${task.description}</p>
+                        <p><strong>Prioridad:</strong> ${task.priority}</p>
+                        <p><strong>Fecha límite:</strong> ${task.date}</p>
+                        <p><strong>Categoría:</strong> ${task.category}</p>
+                        <button onclick="deleteTask(${index})">Eliminar</button>
+                    `;
+        
+                    tasksList.appendChild(taskElement);
+                });
+            }
+        
+            function deleteTask(index) {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+                tasks.splice(index, 1);
+        
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+        
+                loadTasks();
+            }
+        
+            window.onload = loadTasks;
+        </script>
+        
     </body>
 </html>
