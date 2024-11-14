@@ -175,3 +175,63 @@ header {
     background: linear-gradient(to right, rgb(32, 91, 253), rgb(71, 120, 255));
     box-shadow: 0px 0px 20px 5px rgba(71, 120, 255, 0.459);
 }
+
+/* TAREAS EXISTENTES */
+#tasks-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.task-item {
+    border: none;
+    border-radius: 20px;
+    padding: 20px;
+    background: linear-gradient(to right, rgb(32, 91, 253), rgb(71, 120, 255));
+    h3 {
+        margin: 10px;
+        color: white;
+    }
+    p {
+        margin: 5px;
+        color: white;
+    }
+    button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #b40d0d;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+    button:hover {
+        background-color: #df0a0a;
+    }
+}
+
+footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 15px 30px;
+    background: linear-gradient(to right, #00507a, #0470a8);
+    margin-left: 200px;
+    color: #fff;
+    div {
+        padding: 20px;
+        text-align: center;
+        h2 {
+            margin: 5px;
+        }
+    }
+    img {
+        width: 70px;
+        margin: 10px;
+    }
+}
