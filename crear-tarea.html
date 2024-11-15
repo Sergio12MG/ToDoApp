@@ -34,7 +34,7 @@
                 <section id="create-task">
                     <h2>Crear una tarea</h2>
 
-                    <form method='post' action='action'>
+                    <form method='post' id="task-form">
                         <label for="title-task">Título</label>
                         <input type="text" name="title-task" id="title-task">
 
@@ -42,7 +42,7 @@
                         <textarea name="description-task" id="description-task"></textarea>
 
                         <label for="priority-task">Prioridad</label>
-                        <select name="priority-task">
+                        <select name="priority-task" id="priority-task">
                             <option value="baja">Baja</option>
                             <option value="media">Media</option>
                             <option value="alta">Alta</option>
@@ -52,7 +52,7 @@
                         <input type="date" name="date-task" id="date-task">
 
                         <label for="category-task">Categoría</label>
-                        <select name="category-task">
+                        <select name="category-task" id="category-task">
                             <option value="trabajo">Trabajo</option>
                             <option value="personal">Personal</option>
                             <option value="estudio">Estudio</option>

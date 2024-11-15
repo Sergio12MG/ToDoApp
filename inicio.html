@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,11 +37,11 @@
                     <div id="resumen">
                         <div class="item-resumen">
                             <p class="item-resumen__title">Tareas pendientes</p>
-                            <p class="item-resumen__number">0</p>
+                            <p class="item-resumen__number" id="contador-pendientes">0</p>
                         </div>
                         <div class="item-resumen">
                             <p class="item-resumen__title">Tareas completadas</p>
-                            <p class="item-resumen__number">0</p>
+                            <p class="item-resumen__number" id="contador-completadas">0</p>
                         </div>
                         <div class="item-resumen">
                             <p class="item-resumen__title">Tareas eliminadas</p>
@@ -53,13 +53,12 @@
                 <hr>
     
                 <section id="tasks-container">
-                    <h2>Mis tareas</h2>
-
+                    <h2>Tareas pendientes</h2>
                     <a href="crear-tarea.html"><div id="create-task-button"><img src="./assets/images/create.svg" alt="Crear una tarea"><p>Crear</p></div></a>
-
-                    <div id="tasks-list">
-                        
-                    </div>
+                    <div id="tasks-list"></div>
+                    <hr>
+                    <h2>Tareas Completadas</h2>
+                    <div id="completed-tasks-list"></div>
                 </section>
             </section>
         </main>
@@ -82,40 +81,70 @@
         <script>
             function loadTasks() {
                 const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
-                const tasksList = document.getElementById('tasks-list');
+                const tasksList = document.querySelector('#tasks-list');
+                const completedTasksList = document.querySelector('#completed-tasks-list');
+        
+                const pendingCount = tasks.filter(task => !task.completed).length;
+                const completedCount = tasks.filter(task => task.completed).length;
+        
+                document.querySelector('#contador-pendientes').textContent = pendingCount;
+                document.querySelector('#contador-completadas').textContent = completedCount;
+        
                 tasksList.innerHTML = '';
+                completedTasksList.innerHTML = '';
         
                 if (tasks.length === 0) {
                     tasksList.innerHTML = '<p>Aún no hay tareas</p>';
                     return;
                 }
-        
+
                 tasks.forEach((task, index) => {
                     const taskElement = document.createElement('div');
                     taskElement.classList.add('task-item');
-        
+
+                    if (task.priority === 'baja') {
+                        taskElement.classList.add('low');
+                    } else if (task.priority === 'media') {
+                        taskElement.classList.add('medium');
+                    } else if (task.priority === 'alta') {
+                        taskElement.classList.add('high');
+                    }
+
                     taskElement.innerHTML = `
                         <h3>${task.title}</h3>
                         <p><strong>Descripción:</strong> ${task.description}</p>
                         <p><strong>Prioridad:</strong> ${task.priority}</p>
                         <p><strong>Fecha límite:</strong> ${task.date}</p>
                         <p><strong>Categoría:</strong> ${task.category}</p>
-                        <button onclick="deleteTask(${index})">Eliminar</button>
+                        <button onclick="editTask(${index})" class="edit-task-btn">Editar</button>
+                        <button onclick="deleteTask(${index})" class="delete-task-btn">Eliminar</button>
+                        <button onclick="toggleTaskCompletion(${index})" class="complete-task-btn">${task.completed ? 'Desmarcar' : 'Completar'}</button>
                     `;
         
-                    tasksList.appendChild(taskElement);
+                    if (task.completed) {
+                        completedTasksList.appendChild(taskElement);
+                    } else {
+                        tasksList.appendChild(taskElement);
+                    }
                 });
             }
-        
+
+            function editTask(index) {
+                window.location.href = `crear-tarea.html?edit=${index}`;
+            }
+
             function deleteTask(index) {
                 const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-
                 tasks.splice(index, 1);
-        
                 localStorage.setItem('tasks', JSON.stringify(tasks));
-        
-                loadTasks();
+                window.location.href = 'inicio.html';
+            }
+
+            function toggleTaskCompletion(index) {
+                const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                tasks[index].completed = !tasks[index].completed;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                window.location.href = 'inicio.html';
             }
         
             window.onload = loadTasks;
