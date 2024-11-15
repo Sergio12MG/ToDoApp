@@ -48,6 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         localStorage.setItem('tasks', JSON.stringify(tasks));
-        window.location.href = 'inicio.html';
+        window.location.href = 'index.html';
     });
 });
