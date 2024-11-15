@@ -176,6 +176,17 @@ header {
     box-shadow: 0px 0px 20px 5px rgba(71, 120, 255, 0.459);
 }
 
+.sin-tareas {
+    grid-column: 2;
+    font-weight: 100;
+    font-size: 30px;
+    letter-spacing: 1px;
+    margin: 10px;
+    padding: 5px;
+    color: rgb(153, 153, 153);
+    text-align: center;
+}
+
 /* TAREAS (PENDIENTES Y COMPLETADAS) */
 #tasks-list {
     display: grid;

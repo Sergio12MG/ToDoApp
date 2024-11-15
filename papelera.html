@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Papelera - ToDo App</title>
+        <link rel="stylesheet" href="./assets/styles/papelera.css" />
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <img src="./assets/images/todo-logo.svg" alt="Logo de cabecera">
+                <h1>ToDo App</h1>
+            </div>
+        </header>
+
+        <main>
+            <!-- BARRA LATERAL-->
+            <aside id="menu-bar">
+                <h2>Menú</h2>
+                <div id="items-menu">
+                    <a href="inicio.html#main-content"><div class="item-menu"><img src="./assets/images/home.svg" alt="Principal"><h3>Principal</h3></div></a>
+                    <a href="inicio.html#tasks-container"><div class="item-menu"><img src="./assets/images/list-logo.svg" alt="Mis tareas"><h3>Mis tareas</h3></div></a>
+                </div>
+            </aside>
+
+            <!-- CONTENIDO PRINCIPAL-->
+            <section id="paneles">
+                <h2>Papelera</h2>
+
+                <button onclick="clearTrash()" id="clear-trash">Vaciar</button>
+
+                <hr>
+
+                <div id="trash-tasks-list"></div>
+            </section>
+        </main>
+
+        <footer>
+            <div>
+                <h2>Desarrollado por</h2>
+                <p>Sergio Mejía</p>
+            </div>
+            <div>
+                <img src="./assets/images/GitHub.png" alt="">
+                <p>Sergio12MG</p>
+            </div>
+            <div>
+                <img src="./assets/images/Discord.png" alt="">
+                <p>s.m.g2070</p>
+            </div>
+        </footer>
+
+        <script>
+            function loadTrashTasks() {
+                const trashTasks = JSON.parse(localStorage.getItem('trashTasks')) || [];
+                const trashTasksList = document.querySelector('#trash-tasks-list');
+                
+                trashTasksList.innerHTML = '';
+                
+                if (trashTasks.length === 0) {
+                    trashTasksList.innerHTML = '<p class="sin-tareas">No hay tareas en la papelera</p>';
+                    return;
+                }
+                
+                trashTasks.forEach((task, index) => {
+                    const taskElement = document.createElement('div');
+                    taskElement.classList.add('task-item');
+                    
+                    taskElement.innerHTML = `
+                        <h3>${task.title}</h3>
+                        <p><strong>Descripción:</strong> ${task.description}</p>
+                        <p><strong>Prioridad:</strong> ${task.priority}</p>
+                        <p><strong>Fecha límite:</strong> ${task.date}</p>
+                        <p><strong>Categoría:</strong> ${task.category}</p>
+                        <button onclick="restoreTask(${index})" class="restore-task-btn">Restaurar</button>
+                        <button onclick="deleteTrashTask(${index})" class="delete-trash-task-btn">Eliminar Definitivamente</button>
+                    `;
+                    
+                    trashTasksList.appendChild(taskElement);
+                });
+            }
+    
+            function restoreTask(index) {
+                const trashTasks = JSON.parse(localStorage.getItem('trashTasks')) || [];
+                const taskToRestore = trashTasks[index];
+                
+                let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                tasks.push(taskToRestore);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                
+                trashTasks.splice(index, 1);
+                localStorage.setItem('trashTasks', JSON.stringify(trashTasks));
+                
+                loadTrashTasks();
+            }
+    
+            function deleteTrashTask(index) {
+                const trashTasks = JSON.parse(localStorage.getItem('trashTasks')) || [];
+
+                confirm("¿Está seguro de eliminar definitivamente esta tarea?");
+                if(!confirm) {
+                    return
+                } else {
+                    trashTasks.splice(index, 1);
+                    localStorage.setItem('trashTasks', JSON.stringify(trashTasks));
+
+                }
+                
+                loadTrashTasks();
+            }
+    
+            function clearTrash() {
+                confirm("¿Está seguro de vaciar la papelera?");
+                if(!confirm) {
+                    return
+                } else {
+                    localStorage.removeItem('trashTasks');
+                }
+
+                loadTrashTasks();
+            }
+
+            loadTrashTasks();
+        </script>
+    </body>
+</html>

@@ -12,10 +12,6 @@
                 <img src="./assets/images/todo-logo.svg" alt="Logo de cabecera">
                 <h1>ToDo App</h1>
             </div>
-
-            <nav>
-
-            </nav>
         </header>
 
         <main>
@@ -42,10 +38,6 @@
                         <div class="item-resumen">
                             <p class="item-resumen__title">Tareas completadas</p>
                             <p class="item-resumen__number" id="contador-completadas">0</p>
-                        </div>
-                        <div class="item-resumen">
-                            <p class="item-resumen__title">Tareas eliminadas</p>
-                            <p class="item-resumen__number">0</p>
                         </div>
                     </div>
                 </section>
@@ -94,7 +86,7 @@
                 completedTasksList.innerHTML = '';
         
                 if (tasks.length === 0) {
-                    tasksList.innerHTML = '<p>Aún no hay tareas</p>';
+                    tasksList.innerHTML = '<p class="sin-tareas">Aún no hay tareas</p>';
                     return;
                 }
 
@@ -135,9 +127,16 @@
 
             function deleteTask(index) {
                 const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+                const taskToDelete = tasks[index];
+
+                let trashTasks = JSON.parse(localStorage.getItem('trashTasks')) || [];
+                trashTasks.push(taskToDelete);
+                localStorage.setItem('trashTasks', JSON.stringify(trashTasks));
+
                 tasks.splice(index, 1);
                 localStorage.setItem('tasks', JSON.stringify(tasks));
-                window.location.href = 'inicio.html';
+
+                loadTasks();
             }
 
             function toggleTaskCompletion(index) {
@@ -149,6 +148,5 @@
         
             window.onload = loadTasks;
         </script>
-        
     </body>
 </html>
